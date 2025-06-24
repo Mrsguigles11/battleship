@@ -20,4 +20,8 @@ test("place ship on gameboard", () => {
     newGameboard.placeShip(3, [1, 1], [3, 3]);
     expect(newGameboard.ships.length).toBe(1);
     expect(newGameboard.ships[0].coordinates).toEqual([[1,1], [2,2], [3,3]]);
+    newGameboard.placeShip(2, [1, 1], [2, 2]);
+    expect(newGameboard.ships[1].coordinates).toEqual([[1,1], [2,2]]);
+    newGameboard.placeShip(3, [3, 3], [1, 1]);
+    expect(newGameboard.ships[2].coordinates).toEqual([[1,1], [2,2], [3,3]]);
 })

@@ -25,7 +25,12 @@ class Gameboard {
 
     placeShip(length, firstCoord, lastCoord) {
         let newShip = new Ship(length);
-        newShip.coordinates = [firstCoord, lastCoord];
+        newShip.coordinates = [firstCoord];
+        for (let i = firstCoord[0] + 1; i < lastCoord[0]; i++) {
+            newShip.coordinates.push([i, i]);
+        }
+        newShip.coordinates.push(lastCoord);
+
         this.ships.push(newShip);
     }
 }

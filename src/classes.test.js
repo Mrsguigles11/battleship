@@ -19,4 +19,5 @@ test("place ship on gameboard", () => {
     const newGameboard = new Gameboard();
     newGameboard.placeShip(3, [1, 1], [3, 3]);
     expect(newGameboard.ships.length).toBe(1);
+    expect(newGameboard.ships[0].coordinates).toEqual([[1,1], [2,2], [3,3]]);
 })

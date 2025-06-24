@@ -4,6 +4,7 @@ class Ship {
         this.length = length;
     }
     hits = 0;
+    coordinates;
 
     hit() {
         if (this.isSunk()) {
@@ -19,4 +20,14 @@ class Ship {
     }
 }
 
-export {Ship};
+class Gameboard {
+    ships = [];
+
+    placeShip(length, firstCoord, lastCoord) {
+        let newShip = new Ship(length);
+        newShip.coordinates = [firstCoord, lastCoord];
+        this.ships.push(newShip);
+    }
+}
+
+export { Ship, Gameboard };

@@ -23,7 +23,7 @@ class Ship {
 class Gameboard {
     ships = [];
     moves = [];
-    sunk;
+    sunk = 0;
 
     placeShip(length, firstCoord, lastCoord) {
         let newShip = new Ship(length);
@@ -48,20 +48,25 @@ class Gameboard {
             for (const coordinate of ship.coordinates) {
                 if (coordinate[0] && coordinate[1] === input[0] && input[1]) {
                     ship.hit();
+                    if (ship.isSunk()) {
+                        this.sunk++;
+                    }
                 }
             }
         }
         this.moves.push(input);
+
+        if (this.ships.length === this.sunk) {
+            return "game over"
+        }
     }
+
 }
 
-const newGameboard = new Gameboard();
-newGameboard.placeShip(3, [1, 1], [3, 3]);
-newGameboard.receiveAttack([1, 1]);
-const error = newGameboard.receiveAttack([1, 1]);
-console.log(error);
-
-
-
+// const newGameboard = new Gameboard();
+// newGameboard.placeShip(3, [1, 1], [3, 3]);
+//     newGameboard.receiveAttack([2, 2]);
+//     newGameboard.receiveAttack([1, 1]);
+// newGameboard.receiveAttack([3, 3]);
 
 export { Ship, Gameboard };

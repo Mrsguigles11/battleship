@@ -63,10 +63,11 @@ class Gameboard {
 
 }
 
-// const newGameboard = new Gameboard();
-// newGameboard.placeShip(3, [1, 1], [3, 3]);
-//     newGameboard.receiveAttack([2, 2]);
-//     newGameboard.receiveAttack([1, 1]);
-// newGameboard.receiveAttack([3, 3]);
+class Player {
+    constructor(name) {
+        this.name = name;
+    }
+    gameboard = new Gameboard();
+}
 
-export { Ship, Gameboard };
+export { Ship, Gameboard, Player };

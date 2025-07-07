@@ -1,4 +1,3 @@
-import { experiments } from "webpack";
 import {Ship, Gameboard} from "./classes.js";
 
 test("hit ship", () => {

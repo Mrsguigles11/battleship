@@ -26,13 +26,19 @@ class Gameboard {
     moves = [];
     sunk = 0;
 
-    placeShip(length, firstCoord, lastCoord) {
+    placeShip(length, firstCoord, direction) {
         let newShip = new Ship(length);
-        newShip.coordinates = [firstCoord, lastCoord];
-        newShip.coordinates.sort((a, b) => a[0] - b[0]);
-        [firstCoord, lastCoord] = [newShip.coordinates[0], newShip.coordinates[1]];
-        for (let i = firstCoord[0] + 1; i < lastCoord[0]; i++) {
-            newShip.coordinates.splice(-1, 0, [i, i]);
+        newShip.coordinates = [firstCoord];
+
+        if (direction === "horizontal") {
+            for (let i = 1; i < length; i++) {
+                newShip.coordinates.push([firstCoord[0], firstCoord[1] + i])
+            }
+        }
+        else {
+            for (let i = 1; i < length; i++) {
+                newShip.coordinates.push([firstCoord[0] + i, firstCoord[1]])
+            }
         }
 
         this.ships.push(newShip);
@@ -70,5 +76,15 @@ class Player {
     }
     gameboard = new Gameboard();
 }
+
+// const newGameboard = new Gameboard();
+//     newGameboard.placeShip(3, [1, 1], "horizontal");
+//     // newGameboard.receiveAttack([1, 2]);
+//     // newGameboard.receiveAttack([1, 1]);
+//     newGameboard.receiveAttack([1, 3]);
+
+
+
+// console.log(newGameboard.ships[0])
 
 export { Ship, Gameboard, Player };

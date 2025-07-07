@@ -1,4 +1,3 @@
-import { renderShip } from "./render_gameboard";
 
 class Ship {
     constructor (length) {
@@ -23,7 +22,6 @@ class Ship {
 
 class Gameboard {
     
-    user;
     ships = [];
     moves = [];
     sunk = 0;
@@ -38,7 +36,6 @@ class Gameboard {
         }
 
         this.ships.push(newShip);
-        renderShip(this.user, newShip.coordinates);
     }
 
     receiveAttack(input) {
@@ -68,10 +65,10 @@ class Gameboard {
 }
 
 class Player {
-    constructor(name) {
-        this.name = name;
+    constructor(user) {
+        this.user = user;
     }
-    gameboard = new Gameboard(this.name);
+    gameboard = new Gameboard();
 }
 
 export { Ship, Gameboard, Player };

@@ -32,6 +32,5 @@ test("receive attack", () => {
     newGameboard.receiveAttack([1, 3]);
     expect(newGameboard.moves.length).toEqual(2);
     expect(newGameboard.receiveAttack([1, 3])).toMatch("you already moved there!");
-    newGameboard.receiveAttack([1, 1]);
-    expect(newGameboard.receiveAttack([1, 3])).toMatch("game over");
+    expect(newGameboard.receiveAttack([1, 1])).toMatch("game over");
 })

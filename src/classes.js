@@ -46,14 +46,14 @@ class Gameboard {
 
     receiveAttack(input) {
         for (const coordinate of this.moves) {
-            if (coordinate[0] && coordinate[1] === input[0] && input[1]) {
+            if (coordinate[0] === input[0] && coordinate[1] == input[1]) {
                 return "you already moved there!";
             }
         }
 
         for (const ship of this.ships) {
             for (const coordinate of ship.coordinates) {
-                if (coordinate[0] && coordinate[1] === input[0] && input[1]) {
+                if (coordinate[0] === input[0] && coordinate[1] === input[1]) {
                     ship.hit();
                     if (ship.isSunk()) {
                         this.sunk++;
@@ -76,15 +76,5 @@ class Player {
     }
     gameboard = new Gameboard();
 }
-
-// const newGameboard = new Gameboard();
-//     newGameboard.placeShip(3, [1, 1], "horizontal");
-//     // newGameboard.receiveAttack([1, 2]);
-//     // newGameboard.receiveAttack([1, 1]);
-//     newGameboard.receiveAttack([1, 3]);
-
-
-
-// console.log(newGameboard.ships[0])
 
 export { Ship, Gameboard, Player };

@@ -17,18 +17,21 @@ function renderGameboard() {
   }
 }
 
-function renderShip(gameboard, coordinates) {  
-  
-  let rows = gameboard === "computer" ? computerGameboard.children : playerGameboard.children;
+function renderShips(gameboard, ships) {
+  const rows = gameboard === "computer" ? computerGameboard.children : playerGameboard.children;
 
-  for (const coordinate of coordinates) {
-    const x = coordinate[0] -1;
-    const y = coordinate[1] -1;
-    const row = rows[x];
-    const rowChildren = row.children;
-    const square = rowChildren[y];
-    square.style.backgroundColor = "black";
+  for (const ship of ships) {
+    const coordinates = ship.coordinates.values();
+    for (const coordinate of coordinates) {
+      const parsedCoordinate = JSON.parse(coordinate);
+      const x = parsedCoordinate[0] - 1;
+      const y = parsedCoordinate[1] - 1;
+      const row = rows[x];
+      const rowChildren = row.children;
+      const square = rowChildren[y];
+      square.style.backgroundColor = "black";
+    }
   }
 }
 
-export { renderGameboard, renderShip };
+export { renderGameboard, renderShips };

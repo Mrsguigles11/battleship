@@ -65,6 +65,20 @@ class Gameboard {
       return "game over";
     }
   }
+
+  placeRandomShip(length) {
+    const randomiseDirection = Math.floor(Math.random() * 2) + 1;
+    const direction = randomiseDirection === 1 ? "horizontal": "vertical";
+
+    if (direction === "horizontal") {
+        const maximumXValue = 10 - length;
+        this.placeShip(length, [Math.floor(Math.random() * 10) + 1, Math.floor(Math.random() * maximumXValue) + 1], "horizontal");
+    }
+    else {
+        const maximumYValue = 10 - length;
+        this.placeShip(length, [Math.floor(Math.random() * maximumYValue) + 1, Math.floor(Math.random() * 10) + 1], "horizontal");
+    }
+  }
 }
 
 class Player {

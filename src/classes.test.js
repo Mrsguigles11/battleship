@@ -36,3 +36,9 @@ test("receive attack", () => {
     expect(newGameboard.receiveAttack([1, 3])).toMatch("you already moved there!");
     expect(newGameboard.receiveAttack([1, 1])).toMatch("game over");
 })
+
+test("place random ship", () => {
+    const newGameboard = new Gameboard();
+    newGameboard.placeRandomShip(3);
+    expect(newGameboard.ships.length).toBe(1);
+})

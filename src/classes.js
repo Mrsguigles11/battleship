@@ -1,80 +1,77 @@
-
 class Ship {
-    constructor (length) {
-        this.length = length;
-    }
-    hits = 0;
-    coordinates;
+  constructor(length) {
+    this.length = length;
+  }
+  hits = 0;
+  coordinates = new Set();
 
-    hit() {
-        if (this.isSunk()) {
-            return
-        }
-        this.hits++;
+  hit() {
+    if (this.isSunk()) {
+      return;
     }
+    this.hits++;
+  }
 
-    isSunk() {
-        if (this.hits === this.length) {
-            return true
-        }
+  isSunk() {
+    if (this.hits === this.length) {
+      return true;
     }
+  }
 }
 
 class Gameboard {
-    
-    ships = [];
-    moves = [];
-    sunk = 0;
+  ships = [];
+  moves = new Set();
+  sunk = 0;
 
-    placeShip(length, firstCoord, direction) {
-        let newShip = new Ship(length);
-        newShip.coordinates = [firstCoord];
+  placeShip(length, firstCoord, direction) {
+    let newShip = new Ship(length);
+    const firstCoordKey = JSON.stringify(firstCoord);
+    newShip.coordinates.add(firstCoordKey);
 
-        if (direction === "horizontal") {
-            for (let i = 1; i < length; i++) {
-                newShip.coordinates.push([firstCoord[0], firstCoord[1] + i])
-            }
-        }
-        else {
-            for (let i = 1; i < length; i++) {
-                newShip.coordinates.push([firstCoord[0] + i, firstCoord[1]])
-            }
-        }
+    if (direction === "horizontal") {
+      for (let i = 1; i < length; i++) {
+        const newCoordinateKey = JSON.stringify([firstCoord[0], firstCoord[1] + i])
+        newShip.coordinates.add(newCoordinateKey);
+      }
+    } else {
+      for (let i = 1; i < length; i++) {
+        const newCoordinateKey = JSON.stringify([firstCoord[0] + i, firstCoord[1]])
+        newShip.coordinates.add(newCoordinateKey);      
+      }
+    }
+    this.ships.push(newShip);
+  }
 
-        this.ships.push(newShip);
+  receiveAttack(input) {
+
+    const inputKey = JSON.stringify(input);
+
+    if (this.moves.has(inputKey)) {
+        return "you already moved there!";
     }
 
-    receiveAttack(input) {
-        for (const coordinate of this.moves) {
-            if (coordinate[0] === input[0] && coordinate[1] == input[1]) {
-                return "you already moved there!";
-            }
-        }
-
-        for (const ship of this.ships) {
-            for (const coordinate of ship.coordinates) {
-                if (coordinate[0] === input[0] && coordinate[1] === input[1]) {
-                    ship.hit();
-                    if (ship.isSunk()) {
-                        this.sunk++;
-                    }
-                }
-            }
-        }
-        this.moves.push(input);
-
-        if (this.ships.length === this.sunk) {
-            return "game over"
-        }
+    for (const ship of this.ships) {
+        if (ship.coordinates.has(inputKey)) {
+          ship.hit();
+          if (ship.isSunk()) {
+            this.sunk++;
+          }
+      }
     }
+    this.moves.add(inputKey);
 
+    if (this.ships.length === this.sunk) {
+      return "game over";
+    }
+  }
 }
 
 class Player {
-    constructor(user) {
-        this.user = user;
-    }
-    gameboard = new Gameboard();
+  constructor(user) {
+    this.user = user;
+  }
+  gameboard = new Gameboard();
 }
 
-export { Ship, Gameboard, Player };
+export { Player, Ship, Gameboard };

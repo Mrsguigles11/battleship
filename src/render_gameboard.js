@@ -18,14 +18,8 @@ function renderGameboard() {
 }
 
 function renderShip(gameboard, coordinates) {  
-  let rows;
-
-  if (gameboard === "computer") {
-    rows = computerGameboard.children;
-  }
-  else {
-    rows = playerGameboard.children;
-  }
+  
+  let rows = gameboard === "computer" ? computerGameboard.children : playerGameboard.children;
 
   for (const coordinate of coordinates) {
     const x = coordinate[0] -1;

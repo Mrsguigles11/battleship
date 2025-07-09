@@ -26,37 +26,47 @@ class Gameboard {
 
   placeShip(length, firstCoord, direction) {
     let newShip = new Ship(length);
-    const firstCoordKey = JSON.stringify(firstCoord);
-    newShip.coordinates.add(firstCoordKey);
+    let coordinates = [];
+    coordinates.push(firstCoord);
 
     if (direction === "horizontal") {
       for (let i = 1; i < length; i++) {
-        const newCoordinateKey = JSON.stringify([firstCoord[0], firstCoord[1] + i])
-        newShip.coordinates.add(newCoordinateKey);
+        coordinates.push([firstCoord[0],firstCoord[1] + i,])
       }
     } else {
       for (let i = 1; i < length; i++) {
-        const newCoordinateKey = JSON.stringify([firstCoord[0] + i, firstCoord[1]])
-        newShip.coordinates.add(newCoordinateKey);      
+        coordinates.push([firstCoord[0] + i,firstCoord[1],])
       }
     }
+
+    for (let i = 0; i < coordinates.length; i++) {
+      const coordinateskey = JSON.stringify(coordinates[i])
+      for (const ship of this.ships) {
+        if (ship.coordinates.has(coordinateskey)) {
+          return;
+        }
+      }
+      newShip.coordinates.add(coordinateskey);
+    }
+
+    
+
     this.ships.push(newShip);
   }
 
   receiveAttack(input) {
-
     const inputKey = JSON.stringify(input);
 
     if (this.moves.has(inputKey)) {
-        return "you already moved there!";
+      return "you already moved there!";
     }
 
     for (const ship of this.ships) {
-        if (ship.coordinates.has(inputKey)) {
-          ship.hit();
-          if (ship.isSunk()) {
-            this.sunk++;
-          }
+      if (ship.coordinates.has(inputKey)) {
+        ship.hit();
+        if (ship.isSunk()) {
+          this.sunk++;
+        }
       }
     }
     this.moves.add(inputKey);
@@ -68,15 +78,28 @@ class Gameboard {
 
   placeRandomShip(length) {
     const randomiseDirection = Math.floor(Math.random() * 2) + 1;
-    const direction = randomiseDirection === 1 ? "horizontal": "vertical";
+    const direction = randomiseDirection === 1 ? "horizontal" : "vertical";
 
     if (direction === "horizontal") {
-        const maximumXValue = 10 - length;
-        this.placeShip(length, [Math.floor(Math.random() * 10) + 1, Math.floor(Math.random() * maximumXValue) + 1], "horizontal");
-    }
-    else {
-        const maximumYValue = 10 - length;
-        this.placeShip(length, [Math.floor(Math.random() * maximumYValue) + 1, Math.floor(Math.random() * 10) + 1], "horizontal");
+      const maximumXValue = 10 - length;
+      this.placeShip(
+        length,
+        [
+          Math.floor(Math.random() * 10) + 1,
+          Math.floor(Math.random() * maximumXValue) + 1,
+        ],
+        "horizontal"
+      );
+    } else {
+      const maximumYValue = 10 - length;
+      this.placeShip(
+        length,
+        [
+          Math.floor(Math.random() * maximumYValue) + 1,
+          Math.floor(Math.random() * 10) + 1,
+        ],
+        "vertical"
+      );
     }
   }
 }

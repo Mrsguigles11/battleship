@@ -23,7 +23,9 @@ test("place ship on gameboard", () => {
     newGameboard.placeShip(5, [1, 1], "vertical");
     expect(newGameboard.ships[1].coordinates.has(JSON.stringify([1, 1]))).toBe(true);
     expect(newGameboard.ships[1].coordinates.has(JSON.stringify([5, 1]))).toBe(true);
-
+    newGameboard.placeShip(5, [1, 1], "vertical");
+    newGameboard.placeShip(5, [1, 1], "vertical");
+    expect(newGameboard.ships.length).toBe(2);
 })
 
 test("receive attack", () => {

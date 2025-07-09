@@ -1,14 +1,16 @@
 import "./styles.css";
-import { renderGameboard, renderShips } from "./rendering";
+import { renderGameboards, renderShips } from "./rendering";
 import { Player } from "./classes";
 
-renderGameboard();
+const computer = new Player("computer");
+computer.gameboard.placeRandomShip(3);
+renderGameboards(computer);
 
-let player = new Player("player");
+const player = new Player("player");
 player.gameboard.placeRandomShip(4);
 player.gameboard.placeRandomShip(3);
 player.gameboard.placeRandomShip(2);
 player.gameboard.placeRandomShip(2);
 
 
-renderShips("player", player.gameboard.ships);
+renderShips(player.gameboard.ships);

@@ -2,9 +2,9 @@ const gameboards = document.querySelectorAll(".gameboard");
 const playerGameboard = document.querySelector("#player_gameboard");
 const computerGameboard = document.querySelector("#computer_gameboard");
 
-function renderGameboard() {
-  for (const board of gameboards) {
-    for (let row = 9; row >= 0; row--) {
+function renderGameboards(computer) {
+
+  for (let row = 9; row >= 0; row--) {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("row");
       for (let col = 0; col < 10; col++) {
@@ -12,13 +12,29 @@ function renderGameboard() {
         cell.classList.add("gameboard_square");
         rowDiv.appendChild(cell);
       }
-      board.appendChild(rowDiv);
+      playerGameboard.appendChild(rowDiv);
     }
-  }
+
+    for (let row = 9; row >= 0; row--) {
+      const rowDiv = document.createElement("div");
+      rowDiv.classList.add("row");
+      for (let col = 0; col < 10; col++) {
+        const cell = document.createElement("div");
+        cell.classList.add("gameboard_square");
+        rowDiv.appendChild(cell);
+        cell.addEventListener("click", () => {
+        cell.style.backgroundColor = "white";
+        computer.gameboard.receiveAttack([10 - row, col + 1]);
+        console.log(computer.gameboard)
+      });
+      }
+      computerGameboard.appendChild(rowDiv);
+    }
+
 }
 
-function renderShips(gameboard, ships) {
-  const rows = gameboard === "computer" ? computerGameboard.children : playerGameboard.children;
+function renderShips(ships) {
+  const rows = playerGameboard.children;
 
   for (const ship of ships) {
     const coordinates = ship.coordinates.values();
@@ -34,4 +50,4 @@ function renderShips(gameboard, ships) {
   }
 }
 
-export { renderGameboard, renderShips };
+export { renderGameboards, renderShips };

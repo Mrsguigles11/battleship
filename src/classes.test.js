@@ -43,4 +43,6 @@ test("place random ship", () => {
     const newGameboard = new Gameboard();
     newGameboard.placeRandomShip(3);
     expect(newGameboard.ships.length).toBe(1);
+    newGameboard.placeRandomShip(3);
+    expect(newGameboard.ships.length).toBe(2);
 })

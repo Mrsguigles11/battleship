@@ -5,7 +5,10 @@ import { Player } from "./classes";
 renderGameboard();
 
 let player = new Player("player");
-player.gameboard.placeShip(3, [1, 1], "vertical");
-player.gameboard.placeShip(3, [1, 1], "vertical");
+player.gameboard.placeRandomShip(4);
+player.gameboard.placeRandomShip(3);
+player.gameboard.placeRandomShip(2);
+player.gameboard.placeRandomShip(2);
+
 
 renderShips("player", player.gameboard.ships);

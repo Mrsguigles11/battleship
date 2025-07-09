@@ -79,6 +79,7 @@ class Gameboard {
   placeRandomShip(length) {
     const randomiseDirection = Math.floor(Math.random() * 2) + 1;
     const direction = randomiseDirection === 1 ? "horizontal" : "vertical";
+    const currentShipsLength = this.ships.length;
 
     if (direction === "horizontal") {
       const maximumXValue = 10 - length;
@@ -100,6 +101,10 @@ class Gameboard {
         ],
         "vertical"
       );
+    }
+
+    if (this.ships.length != (currentShipsLength + 1)) {
+      this.placeRandomShip(length);
     }
   }
 }

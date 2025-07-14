@@ -24,6 +24,7 @@ class Gameboard {
   misses = new Set();
   hits = new Set();
   sunk = 0;
+  gameStatus;
 
   placeShip(length, firstCoord, direction) {
     let newShip = new Ship(length);
@@ -88,7 +89,8 @@ class Gameboard {
     const inputKey = JSON.stringify(input);
 
     if (this.misses.has(inputKey) || this.hits.has(inputKey)) {
-      return "you already moved there!";
+      this.gameStatus = "you already moved there!";
+      return;
     }
 
     for (const ship of this.ships) {
@@ -103,8 +105,8 @@ class Gameboard {
     this.misses.add(inputKey);
 
     if (this.ships.length === this.sunk) {
-      alert("game over");
-      return "game over";
+      this.gameStatus = "game over";
+      return;
     }
   }
 
@@ -119,7 +121,6 @@ class Gameboard {
     this.receiveAttack(randomCoordinate);
   }
 
-  
 }
 
 class Player {

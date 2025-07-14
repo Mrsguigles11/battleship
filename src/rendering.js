@@ -39,6 +39,9 @@ function renderGameboards(player, computer) {
           cell.style.backgroundColor = "white";
         }
         cell.addEventListener("click", () => {
+          if (computer.gameboard.gameStatus === "game over" || player.gameboard.gameStatus === "game over") {
+            return
+          }
         computer.gameboard.receiveAttack([row, col]);
         player.gameboard.receiveRandomAttack();
         renderGameboards(player, computer);

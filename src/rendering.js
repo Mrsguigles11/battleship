@@ -1,5 +1,6 @@
 const playerGameboard = document.querySelector("#player_gameboard");
 const computerGameboard = document.querySelector("#computer_gameboard");
+const gameStatus = document.querySelector(".game_status");
 
 function renderGameboards(player, computer) {
   playerGameboard.innerHTML = "";
@@ -39,13 +40,14 @@ function renderGameboards(player, computer) {
           cell.style.backgroundColor = "white";
         }
         cell.addEventListener("click", () => {
-          if (computer.gameboard.gameStatus === "game over" || player.gameboard.gameStatus === "game over") {
+          if (gameStatus.textContent === "game over" || cell.style.backgroundColor != "") {
             return
           }
         computer.gameboard.receiveAttack([row, col]);
+        gameStatus.textContent = computer.gameboard.gameStatus;
         player.gameboard.receiveRandomAttack();
         renderGameboards(player, computer);
-        console.log(computer.gameboard)
+        gameStatus.textContent = computer.gameboard.gameStatus;
       });
       }
       computerGameboard.appendChild(rowDiv);
@@ -65,8 +67,8 @@ function renderShips(ships) {
       const y = parsedCoordinate[1] - 1;
       const row = rows[x];
       const rowChildren = row.children;
-      const square = rowChildren[y];
-      square.style.backgroundColor = "black";
+      const cell = rowChildren[y];
+      cell.classList.add("ship");
     }
   }
 }

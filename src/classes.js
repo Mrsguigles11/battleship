@@ -21,7 +21,8 @@ class Ship {
 
 class Gameboard {
   ships = [];
-  moves = new Set();
+  misses = new Set();
+  hits = new Set();
   sunk = 0;
 
   placeShip(length, firstCoord, direction) {
@@ -48,32 +49,7 @@ class Gameboard {
       }
       newShip.coordinates.add(coordinateskey);
     }
-
-    
-
     this.ships.push(newShip);
-  }
-
-  receiveAttack(input) {
-    const inputKey = JSON.stringify(input);
-
-    if (this.moves.has(inputKey)) {
-      return "you already moved there!";
-    }
-
-    for (const ship of this.ships) {
-      if (ship.coordinates.has(inputKey)) {
-        ship.hit();
-        if (ship.isSunk()) {
-          this.sunk++;
-        }
-      }
-    }
-    this.moves.add(inputKey);
-
-    if (this.ships.length === this.sunk) {
-      return "game over";
-    }
   }
 
   placeRandomShip(length) {
@@ -107,6 +83,43 @@ class Gameboard {
       this.placeRandomShip(length);
     }
   }
+
+  receiveAttack(input) {
+    const inputKey = JSON.stringify(input);
+
+    if (this.misses.has(inputKey) || this.hits.has(inputKey)) {
+      return "you already moved there!";
+    }
+
+    for (const ship of this.ships) {
+      if (ship.coordinates.has(inputKey)) {
+        ship.hit();
+        this.hits.add(inputKey);
+        if (ship.isSunk()) {
+          this.sunk++;
+        }
+      }
+    }
+    this.misses.add(inputKey);
+
+    if (this.ships.length === this.sunk) {
+      alert("game over");
+      return "game over";
+    }
+  }
+
+  receiveRandomAttack() {
+    const randomCoordinate = [Math.floor(Math.random() * 10) + 1, Math.floor(Math.random() * 10) + 1];
+    const randomCoordinateKey = JSON.stringify(randomCoordinate)
+
+    if (this.misses.has(randomCoordinateKey) || this.hits.has(randomCoordinateKey)) {
+      return this.receiveRandomAttack();
+    }
+
+    this.receiveAttack(randomCoordinate);
+  }
+
+  
 }
 
 class Player {

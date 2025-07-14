@@ -3,14 +3,13 @@ import { renderGameboards, renderShips } from "./rendering";
 import { Player } from "./classes";
 
 const computer = new Player("computer");
-computer.gameboard.placeRandomShip(3);
-renderGameboards(computer);
+computer.gameboard.placeShip(4, [3, 3], "horizontal");
+
 
 const player = new Player("player");
-player.gameboard.placeRandomShip(4);
-player.gameboard.placeRandomShip(3);
-player.gameboard.placeRandomShip(2);
-player.gameboard.placeRandomShip(2);
+player.gameboard.placeShip(4, [1, 1], "horizontal");
 
 
-renderShips(player.gameboard.ships);
+
+// renderShips(player.gameboard.ships);
+renderGameboards(player, computer);

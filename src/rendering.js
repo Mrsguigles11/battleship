@@ -15,6 +15,11 @@ function renderGameboards(player, computer) {
         cell.classList.add("gameboard_square");
         rowDiv.appendChild(cell);
         const cellCoordinate = JSON.stringify([row, col]);
+        for (const ship of player.gameboard.ships) {
+          if (ship.coordinates.has(cellCoordinate)) {
+            cell.style.backgroundColor = "black";
+          }
+        }
         if (player.gameboard.hits.has(cellCoordinate)) {
           cell.style.backgroundColor = "red";
         }
@@ -48,6 +53,7 @@ function renderGameboards(player, computer) {
         player.gameboard.receiveRandomAttack();
         renderGameboards(player, computer);
         gameStatus.textContent = computer.gameboard.gameStatus;
+        console.log(player.gameboard)
       });
       }
       computerGameboard.appendChild(rowDiv);
@@ -55,22 +61,4 @@ function renderGameboards(player, computer) {
 
 }
 
-function renderShips(ships) {
-  const rows = playerGameboard.children;
-  console.log(playerGameboard)
-
-  for (const ship of ships) {
-    const coordinates = ship.coordinates.values();
-    for (const coordinate of coordinates) {
-      const parsedCoordinate = JSON.parse(coordinate);
-      const x = parsedCoordinate[0] - 1;
-      const y = parsedCoordinate[1] - 1;
-      const row = rows[x];
-      const rowChildren = row.children;
-      const cell = rowChildren[y];
-      cell.classList.add("ship");
-    }
-  }
-}
-
-export { renderGameboards, renderShips };
+export { renderGameboards };

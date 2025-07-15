@@ -87,6 +87,7 @@ class Gameboard {
 
   receiveAttack(input) {
     const inputKey = JSON.stringify(input);
+    const currentHitsSize = this.hits.size;
 
     if (this.misses.has(inputKey) || this.hits.has(inputKey)) {
       this.gameStatus = "you already moved there!";
@@ -102,7 +103,10 @@ class Gameboard {
         }
       }
     }
+
+    if (this.hits.size != currentHitsSize + 1) {
     this.misses.add(inputKey);
+    }
 
     if (this.ships.length === this.sunk) {
       this.gameStatus = "game over";
@@ -115,6 +119,7 @@ class Gameboard {
     const randomCoordinateKey = JSON.stringify(randomCoordinate)
 
     if (this.misses.has(randomCoordinateKey) || this.hits.has(randomCoordinateKey)) {
+      console.log("worked")
       return this.receiveRandomAttack();
     }
 

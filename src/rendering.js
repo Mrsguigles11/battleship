@@ -52,8 +52,12 @@ function renderGameboards(player, computer) {
         gameStatus.textContent = computer.gameboard.gameStatus;
         player.gameboard.receiveRandomAttack();
         renderGameboards(player, computer);
+        if (computer.gameboard.gameStatus === "game over" || player.gameboard.gameStatus === "game over") {
         gameStatus.textContent = computer.gameboard.gameStatus;
+        }
+        // bug - computer doesnt take turn sometimes
         console.log(player.gameboard)
+
       });
       }
       computerGameboard.appendChild(rowDiv);

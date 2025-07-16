@@ -24,7 +24,7 @@ class Gameboard {
   misses = new Set();
   hits = new Set();
   sunk = 0;
-  gameStatus;
+  gameStatus = `ships sunk 0`;
 
   placeShip(length, firstCoord, direction) {
     let newShip = new Ship(length);
@@ -100,6 +100,8 @@ class Gameboard {
         this.hits.add(inputKey);
         if (ship.isSunk()) {
           this.sunk++;
+          this.gameStatus = `ships sunk ${this.sunk}`;
+
         }
       }
     }

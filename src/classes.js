@@ -89,11 +89,6 @@ class Gameboard {
     const inputKey = JSON.stringify(input);
     const currentHitsSize = this.hits.size;
 
-    if (this.misses.has(inputKey) || this.hits.has(inputKey)) {
-      this.gameStatus = "you already moved there!";
-      return;
-    }
-
     for (const ship of this.ships) {
       if (ship.coordinates.has(inputKey)) {
         ship.hit();

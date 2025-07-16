@@ -1,5 +1,5 @@
 import "./styles.css";
-import { renderGameboards } from "./rendering";
+import { renderComputerGameboard, renderPlayerGameboard } from "./rendering";
 import { Player } from "./classes";
 import { bindEvents } from "./dom";
 
@@ -16,6 +16,8 @@ player.gameboard.placeRandomShip(3);
 player.gameboard.placeRandomShip(2);
 player.gameboard.placeRandomShip(2);
 
-renderGameboards(player, computer);
+renderComputerGameboard(computer);
+renderPlayerGameboard(player);
 bindEvents();
 
+export { player, computer }

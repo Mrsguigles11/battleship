@@ -52,17 +52,13 @@ function renderGameboards(player, computer) {
         player.gameboard.receiveRandomAttack();
         renderGameboards(player, computer);
         gameStatus.textContent = player.gameboard.gameStatus === "game over" ? player.gameboard.gameStatus : computer.gameboard.gameStatus;
-        // gameStatus.textContent = computer.gameboard.gameStatus;
-
-        // if (computer.gameboard.gameStatus === "game over" || player.gameboard.gameStatus === "game over") {
-        // gameStatus.textContent = computer.gameboard.gameStatus;
-        // }
-        console.log(computer.gameboard)
       });
       }
       computerGameboard.appendChild(rowDiv);
     }
 
 }
+
+
 
 export { renderGameboards };

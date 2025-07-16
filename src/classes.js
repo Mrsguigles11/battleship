@@ -119,7 +119,6 @@ class Gameboard {
     const randomCoordinateKey = JSON.stringify(randomCoordinate)
 
     if (this.misses.has(randomCoordinateKey) || this.hits.has(randomCoordinateKey)) {
-      console.log("worked")
       return this.receiveRandomAttack();
     }
 

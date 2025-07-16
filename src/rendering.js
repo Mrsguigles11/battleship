@@ -10,7 +10,7 @@ function renderGameboards(player, computer) {
   for (let row = 1; row < 11; row++) {
       const rowDiv = document.createElement("div");
       rowDiv.classList.add("row");
-      for (let col = 0; col < 10; col++) {
+      for (let col = 1; col < 11; col++) {
         const cell = document.createElement("div");
         cell.classList.add("gameboard_square");
         rowDiv.appendChild(cell);
@@ -49,14 +49,11 @@ function renderGameboards(player, computer) {
             return
           }
         computer.gameboard.receiveAttack([row, col]);
-        gameStatus.textContent = computer.gameboard.gameStatus;
         player.gameboard.receiveRandomAttack();
         renderGameboards(player, computer);
         if (computer.gameboard.gameStatus === "game over" || player.gameboard.gameStatus === "game over") {
         gameStatus.textContent = computer.gameboard.gameStatus;
         }
-        // bug - computer doesnt take turn sometimes
-        console.log(player.gameboard)
 
       });
       }

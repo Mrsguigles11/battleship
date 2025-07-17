@@ -2,16 +2,12 @@ import "./styles.css";
 import { renderComputerGameboard, renderPlayerGameboard } from "./rendering";
 import { Player } from "./classes";
 import { bindEvents } from "./dom";
+import { startNewGame } from "./game_logic";
 
 const computer = new Player("computer");
-computer.gameboard.placeRandomShip(4);
-computer.gameboard.placeRandomShip(3);
-computer.gameboard.placeRandomShip(2);
-computer.gameboard.placeRandomShip(2);
-
-
 const player = new Player("player");
 
+startNewGame();
 renderComputerGameboard(computer);
 renderPlayerGameboard(player);
 bindEvents();

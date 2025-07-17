@@ -17,7 +17,7 @@ function takeTurn(coordinate) {
   renderPlayerGameboard(player);
 }
 
-function resetGame() {
+function startNewGame() {
   player.gameboard.ships = [];
   player.gameboard.misses = new Set();
   player.gameboard.hits = new Set();
@@ -41,4 +41,4 @@ function resetGame() {
   renderPlayerGameboard(player);
 }
 
-export { takeTurn, resetGame };
+export { takeTurn, startNewGame };

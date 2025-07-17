@@ -1,6 +1,6 @@
 import { player } from "./index.js";
 import { renderPlayerGameboard } from "./rendering";
-import { resetGame } from "./game_logic.js";
+import { startNewGame } from "./game_logic.js";
 
 const cache = {
   newGameButton: document.querySelector("#new_game_btn"),
@@ -12,7 +12,7 @@ function bindEvents() {
     if (player.gameboard.ships.length === 0) {
       return
     }
-    resetGame();
+    startNewGame();
   });
   cache.randomShipsButton.addEventListener('click', () => {
     if (player.gameboard.hits.size != 0 || player.gameboard.misses.size != 0) {

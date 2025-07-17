@@ -1,5 +1,5 @@
 import { player, computer } from "./index.js";
-import { renderComputerGameboard, renderPlayerGameboard } from "./rendering.js";
+import { renderComputerGameboard, renderPlayerGameboard, revealSurvivingShips } from "./rendering.js";
 
 const gameStatus = document.querySelector(".game_status");
 
@@ -13,6 +13,9 @@ function takeTurn(coordinate) {
     player.gameboard.gameStatus === "game over"
       ? player.gameboard.gameStatus
       : computer.gameboard.gameStatus;
+  if (gameStatus.textContent === "game over") {
+    revealSurvivingShips(computer);
+  }
   renderComputerGameboard(computer);
   renderPlayerGameboard(player);
 }
@@ -28,6 +31,7 @@ function startNewGame() {
   computer.gameboard.misses = new Set();
   computer.gameboard.hits = new Set();
   computer.gameboard.sunk = 0;
+  computer.gameboard.survivingShips = new Set();
   computer.gameboard.gameStatus = `ships sunk 0`;
 
   computer.gameboard.placeRandomShip(4);

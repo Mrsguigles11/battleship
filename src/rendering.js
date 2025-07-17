@@ -45,6 +45,10 @@ function renderComputerGameboard(computer) {
       } else if (computer.gameboard.misses.has(cellCoordinate)) {
         cell.style.backgroundColor = "white";
       }
+      else if (computer.gameboard.survivingShips.has(cellCoordinate)) {
+        cell.style.backgroundColor = "grey";
+
+      }
       cell.addEventListener("click", () => {
         if (cell.style.backgroundColor === "") {
           takeTurn([row, col]);
@@ -55,4 +59,16 @@ function renderComputerGameboard(computer) {
   }
 }
 
-export { renderPlayerGameboard, renderComputerGameboard };
+function revealSurvivingShips(computer) {
+  for (const ship of computer.gameboard.ships) {
+    const coordinatesArray = Array.from(ship.coordinates);
+    for (const coordinate of coordinatesArray) {
+      if (!computer.gameboard.hits.has(coordinate) && !computer.gameboard.misses.has(coordinate)) {
+        computer.gameboard.survivingShips.add(coordinate);
+      }
+    }
+  }
+  renderComputerGameboard(computer);
+}
+
+export { renderPlayerGameboard, renderComputerGameboard, revealSurvivingShips };

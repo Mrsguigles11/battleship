@@ -1,11 +1,27 @@
+import { player } from "./index.js";
+import { renderPlayerGameboard } from "./rendering";
+
 const cache = {
-  newGameButton: document.querySelector("button"),
+  newGameButton: document.querySelector("#new_game_btn"),
+  randomShipsButton : document.querySelector('#random_ships_btn')
 };
 
 function bindEvents() {
   cache.newGameButton.addEventListener("click", () => {
     location.reload();
   });
+  cache.randomShipsButton.addEventListener('click', () => {
+    if (player.gameboard.hits.size != 0 || player.gameboard.misses.size != 0) {
+      return
+    }
+    player.gameboard.ships = [];
+    renderPlayerGameboard(player);
+    player.gameboard.placeRandomShip(4);
+    player.gameboard.placeRandomShip(3);
+    player.gameboard.placeRandomShip(2);
+    player.gameboard.placeRandomShip(2);
+    renderPlayerGameboard(player);
+  })
 }
 
 export { bindEvents };

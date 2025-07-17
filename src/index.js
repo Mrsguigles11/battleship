@@ -11,10 +11,6 @@ computer.gameboard.placeRandomShip(2);
 
 
 const player = new Player("player");
-player.gameboard.placeRandomShip(4);
-player.gameboard.placeRandomShip(3);
-player.gameboard.placeRandomShip(2);
-player.gameboard.placeRandomShip(2);
 
 renderComputerGameboard(computer);
 renderPlayerGameboard(player);

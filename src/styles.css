@@ -44,3 +44,7 @@ body {
     width: 100%;
     height: 10%;
 }
+
+.square_hovered {
+    background-color: rgb(182, 182, 182);
+}

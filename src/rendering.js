@@ -12,6 +12,7 @@ function renderPlayerGameboard(player) {
     for (let col = 1; col < 11; col++) {
       const cell = document.createElement("div");
       cell.classList.add("gameboard_square");
+      cell.classList.add("player_gameboard_square");
       rowDiv.appendChild(cell);
       const cellCoordinate = JSON.stringify([row, col]);
       for (const ship of player.gameboard.ships) {

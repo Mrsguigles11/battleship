@@ -4,7 +4,7 @@ import { startNewGame } from "./game_logic.js";
 
 const cache = {
   newGameButton: document.querySelector("#new_game_btn"),
-  randomShipsButton : document.querySelector('#random_ships_btn')
+  randomShipsButton : document.querySelector('#random_ships_btn'), 
 };
 
 function bindEvents() {
@@ -26,6 +26,8 @@ function bindEvents() {
     player.gameboard.placeRandomShip(2);
     renderPlayerGameboard(player);
   })
-}
+    
+  }
+
 
 export { bindEvents };

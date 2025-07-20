@@ -13,6 +13,22 @@ startNewGame();
 renderComputerGameboard(computer);
 renderPlayerGameboard(player);
 bindEvents();
-addHorizontalHover(4);
 
-export { player, computer }
+let graph = [];
+const playerGameboardRows =
+    document.querySelector("#player_gameboard").children;
+    for (let i = 0; i < 10; i++) {
+        let array = [];
+        const rowChildren = playerGameboardRows[i].children
+        for (const child of rowChildren) {
+            array.push(child)
+        }
+        graph.push(array);
+    }    
+
+
+addHorizontalHover(4, "vertical");
+
+
+
+export { player, computer, graph }

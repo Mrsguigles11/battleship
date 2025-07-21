@@ -42,46 +42,62 @@ function addHover(length, direction) {
       });
     }
     addFinalSquaresHover(length, direction);
-}
+  }
 }
 
 function addFinalSquaresHover(length, direction) {
-    if (direction === "horizontal") {
-    let row = 0;
-    let col = 10 - length;
-    while (row < 10) {
-        const currentRow = row;
-        for (let i = col; i < 10; i++) {
-        const cell = graph[currentRow][i];
-        cell.addEventListener('mouseover', () => {
+  let row = 0;
+  let col = 0;
+  if (direction === "horizontal") {
+    col = 10 - length;
+  } else {
+    row = 10 - length;
+  }
+  while (row < 10) {
+    const currentRow = row;
+    for (let i = col; i < 10; i++) {
+      const cell = graph[currentRow][i];
+      cell.addEventListener("mouseover", () => {
         cell.classList.add("square_hovered");
-        for (let x = col; x < 10; x++) {
-            const targetCell = graph[currentRow][x];
-            targetCell.classList.add("square_hovered");
+        for (let x = 10 - length; x < 10; x++) {
+          let targetCell;
+          targetCell =
+            direction === "horizontal"
+              ? graph[currentRow][x]
+              : (targetCell = graph[x][i]);
+          targetCell.classList.add("square_hovered");
         }
-    })
-        cell.addEventListener('mouseout', () => {
+      });
+      cell.addEventListener("mouseout", () => {
         cell.classList.add("square_hovered");
-        for (let x = col; x < 10; x++) {
-            const targetCell = graph[currentRow][x];
-            targetCell.classList.remove("square_hovered");
+        for (let x = 10 - length; x < 10; x++) {
+          let targetCell;
+          targetCell =
+            direction === "horizontal"
+              ? graph[currentRow][x]
+              : (targetCell = graph[x][i]);
+          targetCell.classList.remove("square_hovered");
         }
-    })
-    cell.addEventListener("click", () => {
-        player.gameboard.placeShip(
-          length,
-          [currentRow + 1, col + 1],
-          direction
-        );
+      });
+      cell.addEventListener("click", () => {
+        if (direction === "horizontal") {
+          player.gameboard.placeShip(
+            length,
+            [currentRow + 1, col + 1],
+            direction
+          );
+        } else {
+          player.gameboard.placeShip(
+            length,
+            [currentRow, i + 1],
+            direction
+          );
+        }
         renderPlayerGameboard(player);
       });
-}
-    row ++
     }
+    row++;
+  }
 }
-
-}
-
-
 
 export { addHover };

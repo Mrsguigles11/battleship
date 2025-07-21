@@ -3,7 +3,7 @@ import { renderComputerGameboard, renderPlayerGameboard } from "./rendering";
 import { Player } from "./classes";
 import { bindEvents } from "./dom";
 import { startNewGame } from "./game_logic";
-import { addHover } from "./add_hover";
+import { addHover } from "./event_listeners";
 
 const computer = new Player("computer");
 computer.gameboard.survivingShips = new Set();

@@ -3,7 +3,7 @@ import { renderComputerGameboard, renderPlayerGameboard } from "./rendering";
 import { Player } from "./classes";
 import { bindEvents } from "./dom";
 import { startNewGame } from "./game_logic";
-import { addHover } from "./place_ships";
+import { addHover } from "./add_hover";
 
 const computer = new Player("computer");
 computer.gameboard.survivingShips = new Set();
@@ -27,7 +27,7 @@ const playerGameboardRows =
     }    
 
 
-addHover(4, "vertical");
+addHover(4, "horizontal");
 
 
 

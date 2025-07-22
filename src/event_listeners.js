@@ -55,10 +55,9 @@ function addFinalSquaresHover(length, direction) {
   } else {
     row = 10 - length;
   }
-  while (row < 10) {
-    const currentRow = row;
-    for (let i = col; i < 10; i++) {
-      const cell = graph[currentRow][i];
+  for (let currentRow = row; currentRow < 10; currentRow++) {
+    for (let currentCol = col; currentCol < 10; currentCol++) {
+      const cell = graph[currentRow][currentCol];
       cell.addEventListener("mouseover", () => {
         cell.classList.add("square_hovered");
         for (let x = 10 - length; x < 10; x++) {
@@ -66,7 +65,7 @@ function addFinalSquaresHover(length, direction) {
           targetCell =
             direction === "horizontal"
               ? graph[currentRow][x]
-              : (targetCell = graph[x][i]);
+              : (targetCell = graph[x][currentCol]);
           targetCell.classList.add("square_hovered");
         }
       });
@@ -77,7 +76,7 @@ function addFinalSquaresHover(length, direction) {
           targetCell =
             direction === "horizontal"
               ? graph[currentRow][x]
-              : (targetCell = graph[x][i]);
+              : (targetCell = graph[x][currentCol]);
           targetCell.classList.remove("square_hovered");
         }
       });
@@ -89,14 +88,16 @@ function addFinalSquaresHover(length, direction) {
             direction
           );
         } else {
-          player.gameboard.placeShip(length, [currentRow + 1, i + 1], direction);
+          player.gameboard.placeShip(
+            length,
+            [row + 1, currentCol + 1],
+            direction
+          );
         }
         renderPlayerGameboard(player);
         setUpGame(player, direction);
-
       });
     }
-    row++;
   }
 }
 

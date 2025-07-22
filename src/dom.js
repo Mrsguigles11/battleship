@@ -1,6 +1,6 @@
-import { player } from "./index.js";
+import { player, computer } from "./index.js";
 import { renderPlayerGameboard } from "./rendering";
-import { startNewGame } from "./game_logic.js";
+import { startNewGame, startGame } from "./game_logic.js";
 
 const cache = {
   newGameButton: document.querySelector("#new_game_btn"),
@@ -20,11 +20,13 @@ function bindEvents() {
     }
     player.gameboard.ships = [];
     renderPlayerGameboard(player);
+    player.gameboard.placeRandomShip(5);
     player.gameboard.placeRandomShip(4);
     player.gameboard.placeRandomShip(3);
     player.gameboard.placeRandomShip(2);
     player.gameboard.placeRandomShip(2);
     renderPlayerGameboard(player);
+    startGame();
   })
     
   }

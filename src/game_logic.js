@@ -47,6 +47,7 @@ function startNewGame() {
 
   renderComputerGameboard(computer);
   renderPlayerGameboard(player);
+  setUpGame(player, "vertical");
 }
 
 function setUpGame(player, direction) {
@@ -66,6 +67,12 @@ function setUpGame(player, direction) {
     addHover(2, direction);
   }
   if (player.gameboard.ships.length === 5) {
+    startGame()
+  }
+}
+
+function startGame() {
+    computer.gameboard.placeRandomShip(5);
     computer.gameboard.placeRandomShip(4);
     computer.gameboard.placeRandomShip(3);
     computer.gameboard.placeRandomShip(2);
@@ -73,8 +80,6 @@ function setUpGame(player, direction) {
     computer.gameboard.gameStatus = "ships sunk 0";
     gameStatus.textContent = computer.gameboard.gameStatus;
     renderComputerGameboard(computer);
-
-  }
 }
 
-export { takeTurn, startNewGame, setUpGame };
+export { takeTurn, startNewGame, setUpGame, startGame };

@@ -12,7 +12,6 @@ startNewGame();
 renderComputerGameboard(computer);
 renderPlayerGameboard(player);
 bindEvents();
-
 setUpGame(player, "vertical");
 
 export { player, computer }

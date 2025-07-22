@@ -89,7 +89,7 @@ function addFinalSquaresHover(length, direction) {
             direction
           );
         } else {
-          player.gameboard.placeShip(length, [currentRow, i + 1], direction);
+          player.gameboard.placeShip(length, [currentRow + 1, i + 1], direction);
         }
         renderPlayerGameboard(player);
         setUpGame(player, direction);

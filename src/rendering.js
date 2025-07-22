@@ -40,6 +40,7 @@ function renderComputerGameboard(computer) {
     for (let col = 1; col < 11; col++) {
       const cell = document.createElement("div");
       cell.classList.add("gameboard_square");
+      cell.classList.add("computer_gameboard_square");
       rowDiv.appendChild(cell);
       const cellCoordinate = JSON.stringify([row, col]);
       if (computer.gameboard.hits.has(cellCoordinate)) {
@@ -49,13 +50,14 @@ function renderComputerGameboard(computer) {
       }
       else if (computer.gameboard.survivingShips.has(cellCoordinate)) {
         cell.style.backgroundColor = "grey";
-
       }
-      cell.addEventListener("click", () => {
+      if (computer.gameboard.gameStatus != "place ships!") {
+        cell.addEventListener("click", () => {
         if (cell.style.backgroundColor === "") {
           takeTurn([row, col]);
-        }
+        } 
       });
+      }
     }
     computerGameboard.appendChild(rowDiv);
   }

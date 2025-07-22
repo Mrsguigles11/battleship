@@ -3,6 +3,7 @@ import {
   renderComputerGameboard,
   renderPlayerGameboard,
   revealSurvivingShips,
+  addCompEventListeners,
 } from "./rendering.js";
 import { addHover } from "./event_listeners.js";
 
@@ -40,14 +41,9 @@ function startNewGame() {
   computer.gameboard.hits = new Set();
   computer.gameboard.sunk = 0;
   computer.gameboard.survivingShips = new Set();
-  computer.gameboard.gameStatus = `ships sunk 0`;
+  computer.gameboard.gameStatus = `place ships!`;
 
-  computer.gameboard.placeRandomShip(4);
-  computer.gameboard.placeRandomShip(3);
-  computer.gameboard.placeRandomShip(2);
-  computer.gameboard.placeRandomShip(2);
-
-  gameStatus.textContent = `ships sunk 0`;
+  gameStatus.textContent = `place ships!`;
 
   renderComputerGameboard(computer);
   renderPlayerGameboard(player);
@@ -68,6 +64,16 @@ function setUpGame(player, direction) {
   }
   if (player.gameboard.ships.length === 4) {
     addHover(2, direction);
+  }
+  if (player.gameboard.ships.length === 5) {
+    computer.gameboard.placeRandomShip(4);
+    computer.gameboard.placeRandomShip(3);
+    computer.gameboard.placeRandomShip(2);
+    computer.gameboard.placeRandomShip(2);
+    computer.gameboard.gameStatus = "ships sunk 0";
+    gameStatus.textContent = computer.gameboard.gameStatus;
+    renderComputerGameboard(computer);
+
   }
 }
 

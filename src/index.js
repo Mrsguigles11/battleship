@@ -2,8 +2,7 @@ import "./styles.css";
 import { renderComputerGameboard, renderPlayerGameboard } from "./rendering";
 import { Player } from "./classes";
 import { bindEvents } from "./dom";
-import { startNewGame } from "./game_logic";
-import { addHover } from "./event_listeners";
+import { startNewGame, setUpGame } from "./game_logic";
 
 const computer = new Player("computer");
 computer.gameboard.survivingShips = new Set();
@@ -14,21 +13,6 @@ renderComputerGameboard(computer);
 renderPlayerGameboard(player);
 bindEvents();
 
-let graph = [];
-const playerGameboardRows =
-    document.querySelector("#player_gameboard").children;
-    for (let i = 0; i < 10; i++) {
-        let array = [];
-        const rowChildren = playerGameboardRows[i].children
-        for (const child of rowChildren) {
-            array.push(child)
-        }
-        graph.push(array);
-    }    
+setUpGame(player, "vertical");
 
-
-addHover(4, "horizontal");
-
-
-
-export { player, computer, graph }
+export { player, computer }

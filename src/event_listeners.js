@@ -1,5 +1,6 @@
-import { player, graph } from "./index.js";
-import { renderPlayerGameboard } from "./rendering.js";
+import { player } from "./index.js";
+import { renderPlayerGameboard, graph } from "./rendering.js";
+import { setUpGame } from "./game_logic.js";
 
 function addHover(length, direction) {
   let upperRowLimit = 10;
@@ -39,6 +40,7 @@ function addHover(length, direction) {
       cell.addEventListener("click", () => {
         player.gameboard.placeShip(length, [row + 1, col + 1], direction);
         renderPlayerGameboard(player);
+        setUpGame(player, direction);
       });
     }
     addFinalSquaresHover(length, direction);
@@ -87,13 +89,11 @@ function addFinalSquaresHover(length, direction) {
             direction
           );
         } else {
-          player.gameboard.placeShip(
-            length,
-            [currentRow, i + 1],
-            direction
-          );
+          player.gameboard.placeShip(length, [currentRow, i + 1], direction);
         }
         renderPlayerGameboard(player);
+        setUpGame(player, direction);
+
       });
     }
     row++;

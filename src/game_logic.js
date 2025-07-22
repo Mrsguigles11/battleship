@@ -1,10 +1,18 @@
 import { player, computer } from "./index.js";
-import { renderComputerGameboard, renderPlayerGameboard, revealSurvivingShips } from "./rendering.js";
+import {
+  renderComputerGameboard,
+  renderPlayerGameboard,
+  revealSurvivingShips,
+} from "./rendering.js";
+import { addHover } from "./event_listeners.js";
 
 const gameStatus = document.querySelector(".game_status");
 
 function takeTurn(coordinate) {
-  if (gameStatus.textContent === "game over" || player.gameboard.ships.length === 0) {
+  if (
+    gameStatus.textContent === "game over" ||
+    player.gameboard.ships.length === 0
+  ) {
     return;
   }
   computer.gameboard.receiveAttack(coordinate);
@@ -45,4 +53,22 @@ function startNewGame() {
   renderPlayerGameboard(player);
 }
 
-export { takeTurn, startNewGame };
+function setUpGame(player, direction) {
+  if (player.gameboard.ships.length === 0) {
+    addHover(5, direction);
+  }
+  if (player.gameboard.ships.length === 1) {
+    addHover(4, direction);
+  }
+  if (player.gameboard.ships.length === 2) {
+    addHover(3, direction);
+  }
+  if (player.gameboard.ships.length === 3) {
+    addHover(2, direction);
+  }
+  if (player.gameboard.ships.length === 4) {
+    addHover(2, direction);
+  }
+}
+
+export { takeTurn, startNewGame, setUpGame };

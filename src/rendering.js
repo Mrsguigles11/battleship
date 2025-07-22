@@ -28,6 +28,7 @@ function renderPlayerGameboard(player) {
     }
     playerGameboard.appendChild(rowDiv);
   }
+  createGraph();
 }
 
 function renderComputerGameboard(computer) {
@@ -72,4 +73,20 @@ function revealSurvivingShips(computer) {
   renderComputerGameboard(computer);
 }
 
-export { renderPlayerGameboard, renderComputerGameboard, revealSurvivingShips };
+let graph = [];
+
+function createGraph() {
+graph = [];
+const playerGameboardRows =
+    playerGameboard.children;
+    for (let i = 0; i < 10; i++) {
+        let array = [];
+        const rowChildren = playerGameboardRows[i].children
+        for (const child of rowChildren) {
+            array.push(child)
+        }
+        graph.push(array);
+    }    
+}
+
+export { renderPlayerGameboard, renderComputerGameboard, revealSurvivingShips, graph };

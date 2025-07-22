@@ -3,7 +3,6 @@ import {
   renderComputerGameboard,
   renderPlayerGameboard,
   revealSurvivingShips,
-  addCompEventListeners,
 } from "./rendering.js";
 import { addHover } from "./event_listeners.js";
 

@@ -1,10 +1,11 @@
-import { player, computer } from "./index.js";
+import { player } from "./index.js";
 import { renderPlayerGameboard } from "./rendering";
-import { startNewGame, startGame } from "./game_logic.js";
+import { startNewGame, startGame, setUpGame } from "./game_logic.js";
 
 const cache = {
   newGameButton: document.querySelector("#new_game_btn"),
   randomShipsButton : document.querySelector('#random_ships_btn'), 
+  changeDirectionButton : document.querySelector("#change_direction_btn")
 };
 
 function bindEvents() {
@@ -28,7 +29,19 @@ function bindEvents() {
     renderPlayerGameboard(player);
     startGame();
   })
-    
+  cache.changeDirectionButton.addEventListener('click', () => {
+    if (cache.changeDirectionButton.textContent === "Horizontal") {
+      renderPlayerGameboard(player);
+      setUpGame(player, "horizontal");
+      cache.changeDirectionButton.textContent = "Vertical"
+    } 
+    else {
+      renderPlayerGameboard(player);
+      setUpGame(player, "vertical");
+      cache.changeDirectionButton.textContent = "Horizontal"
+
+    }
+  })
   }
 
 

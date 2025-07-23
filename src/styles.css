@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 * {
     padding: 0;
     margin: 0;
@@ -7,6 +7,9 @@
 
 :root {
     font-size: 18px;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
@@ -16,6 +19,11 @@ body {
     align-items: center;
     justify-content: center;
     row-gap: 10px;
+    background: #ffffff;
+    background: linear-gradient(90deg,rgba(235, 235, 235, 1) 0%, rgba(212, 212, 212, 1) 50%, rgba(255, 255, 255, 1) 100%);}
+
+h1 {
+    font-size: 3rem;
 }
 
 .gameboard_wrapper {
@@ -30,13 +38,15 @@ body {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column-reverse;
-    border: 2px solid black;
+    border: 3px solid black;
 }
 
 .gameboard_square {
     border: 1px solid grey;
     height: 100%;
     width: 10%;
+    cursor: pointer;
+
 }
 
 .row {
@@ -47,4 +57,24 @@ body {
 
 .square_hovered {
     background-color: rgb(182, 182, 182);
+}
+
+button {
+    font-family: inherit;
+    font-weight: 100;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: rgb(219, 219, 219);
+}
+
+.buttons_container {
+    display: flex;
+    column-gap: 10px;
+}
+
+.game_status {
+    font-size: 1.2rem;
 }

@@ -1,4 +1,4 @@
-import { computer, player } from "./index.js";
+import { player } from "./index.js";
 import { renderPlayerGameboard } from "./rendering";
 import { startNewGame, startGame, setUpGame } from "./game_logic.js";
 

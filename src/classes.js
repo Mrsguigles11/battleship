@@ -33,16 +33,16 @@ class Gameboard {
 
     if (direction === "horizontal") {
       for (let i = 1; i < length; i++) {
-        coordinates.push([firstCoord[0],firstCoord[1] + i,])
+        coordinates.push([firstCoord[0], firstCoord[1] + i]);
       }
     } else {
       for (let i = 1; i < length; i++) {
-        coordinates.push([firstCoord[0] + i,firstCoord[1],])
+        coordinates.push([firstCoord[0] + i, firstCoord[1]]);
       }
     }
 
     for (let i = 0; i < coordinates.length; i++) {
-      const coordinateskey = JSON.stringify(coordinates[i])
+      const coordinateskey = JSON.stringify(coordinates[i]);
       for (const ship of this.ships) {
         if (ship.coordinates.has(coordinateskey)) {
           return;
@@ -52,7 +52,6 @@ class Gameboard {
     }
     this.ships.push(newShip);
   }
-
 
   placeRandomShip(length) {
     const randomiseDirection = Math.floor(Math.random() * 2) + 1;
@@ -79,7 +78,7 @@ class Gameboard {
         ],
         "vertical"
       );
-  }
+    }
 
     if (this.ships.length != targetLength) {
       this.placeRandomShip(length);
@@ -97,13 +96,12 @@ class Gameboard {
         if (ship.isSunk()) {
           this.sunk++;
           this.gameStatus = `ships sunk ${this.sunk}`;
-
         }
       }
     }
 
     if (this.hits.size != currentHitsSize + 1) {
-    this.misses.add(inputKey);
+      this.misses.add(inputKey);
     }
 
     if (this.ships.length === this.sunk) {
@@ -113,16 +111,21 @@ class Gameboard {
   }
 
   receiveRandomAttack() {
-    const randomCoordinate = [Math.floor(Math.random() * 10) + 1, Math.floor(Math.random() * 10) + 1];
-    const randomCoordinateKey = JSON.stringify(randomCoordinate)
+    const randomCoordinate = [
+      Math.floor(Math.random() * 10) + 1,
+      Math.floor(Math.random() * 10) + 1,
+    ];
+    const randomCoordinateKey = JSON.stringify(randomCoordinate);
 
-    if (this.misses.has(randomCoordinateKey) || this.hits.has(randomCoordinateKey)) {
+    if (
+      this.misses.has(randomCoordinateKey) ||
+      this.hits.has(randomCoordinateKey)
+    ) {
       return this.receiveRandomAttack();
     }
 
     this.receiveAttack(randomCoordinate);
   }
-
 }
 
 class Player {

@@ -14,4 +14,4 @@ renderPlayerGameboard(player);
 bindEvents();
 setUpGame(player, "vertical");
 
-export { player, computer }
+export { player, computer };

@@ -66,21 +66,20 @@ function setUpGame(player, direction) {
     addHover(2, direction);
   }
   if (player.gameboard.ships.length === 5) {
-    console.log("this");
-    startGame()
+    startGame();
   }
 }
 
 function startGame() {
-    computer.gameboard.ships = [];
-    computer.gameboard.placeRandomShip(5);
-    computer.gameboard.placeRandomShip(4);
-    computer.gameboard.placeRandomShip(3);
-    computer.gameboard.placeRandomShip(2);
-    computer.gameboard.placeRandomShip(2);
-    computer.gameboard.gameStatus = "ships sunk 0";
-    gameStatus.textContent = computer.gameboard.gameStatus;
-    renderComputerGameboard(computer);
+  computer.gameboard.ships = [];
+  computer.gameboard.placeRandomShip(5);
+  computer.gameboard.placeRandomShip(4);
+  computer.gameboard.placeRandomShip(3);
+  computer.gameboard.placeRandomShip(2);
+  computer.gameboard.placeRandomShip(2);
+  computer.gameboard.gameStatus = "ships sunk 0";
+  gameStatus.textContent = computer.gameboard.gameStatus;
+  renderComputerGameboard(computer);
 }
 
 export { takeTurn, startNewGame, setUpGame, startGame };

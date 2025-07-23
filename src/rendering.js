@@ -47,16 +47,15 @@ function renderComputerGameboard(computer) {
         cell.style.backgroundColor = "red";
       } else if (computer.gameboard.misses.has(cellCoordinate)) {
         cell.style.backgroundColor = "white";
-      }
-      else if (computer.gameboard.survivingShips.has(cellCoordinate)) {
+      } else if (computer.gameboard.survivingShips.has(cellCoordinate)) {
         cell.style.backgroundColor = "grey";
       }
       if (computer.gameboard.gameStatus != "place ships!") {
         cell.addEventListener("click", () => {
-        if (cell.style.backgroundColor === "") {
-          takeTurn([row, col]);
-        } 
-      });
+          if (cell.style.backgroundColor === "") {
+            takeTurn([row, col]);
+          }
+        });
       }
     }
     computerGameboard.appendChild(rowDiv);
@@ -67,7 +66,10 @@ function revealSurvivingShips(computer) {
   for (const ship of computer.gameboard.ships) {
     const coordinatesArray = Array.from(ship.coordinates);
     for (const coordinate of coordinatesArray) {
-      if (!computer.gameboard.hits.has(coordinate) && !computer.gameboard.misses.has(coordinate)) {
+      if (
+        !computer.gameboard.hits.has(coordinate) &&
+        !computer.gameboard.misses.has(coordinate)
+      ) {
         computer.gameboard.survivingShips.add(coordinate);
       }
     }
@@ -78,17 +80,21 @@ function revealSurvivingShips(computer) {
 let graph = [];
 
 function createGraph() {
-graph = [];
-const playerGameboardRows =
-    playerGameboard.children;
-    for (let i = 0; i < 10; i++) {
-        let array = [];
-        const rowChildren = playerGameboardRows[i].children
-        for (const child of rowChildren) {
-            array.push(child)
-        }
-        graph.push(array);
-    }    
+  graph = [];
+  const playerGameboardRows = playerGameboard.children;
+  for (let i = 0; i < 10; i++) {
+    let array = [];
+    const rowChildren = playerGameboardRows[i].children;
+    for (const child of rowChildren) {
+      array.push(child);
+    }
+    graph.push(array);
+  }
 }
 
-export { renderPlayerGameboard, renderComputerGameboard, revealSurvivingShips, graph };
+export {
+  renderPlayerGameboard,
+  renderComputerGameboard,
+  revealSurvivingShips,
+  graph,
+};

@@ -45,7 +45,7 @@ class Gameboard {
       const coordinateskey = JSON.stringify(coordinates[i])
       for (const ship of this.ships) {
         if (ship.coordinates.has(coordinateskey)) {
-          return this.placeRandomShip(length);
+          return;
         }
       }
       newShip.coordinates.add(coordinateskey);
@@ -57,6 +57,7 @@ class Gameboard {
   placeRandomShip(length) {
     const randomiseDirection = Math.floor(Math.random() * 2) + 1;
     const direction = randomiseDirection === 1 ? "horizontal" : "vertical";
+    const targetLength = this.ships.length + 1;
 
     if (direction === "horizontal") {
       const maximumXValue = 10 - length;
@@ -80,9 +81,9 @@ class Gameboard {
       );
   }
 
-    // if (this.shipsStatus === "no") {
-    //   this.placeRandomShip(length);
-    // }
+    if (this.ships.length != targetLength) {
+      this.placeRandomShip(length);
+    }
   }
 
   receiveAttack(input) {

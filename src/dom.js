@@ -20,14 +20,12 @@ function bindEvents() {
       return;
     }
     player.gameboard.ships = [];
-    computer.gameboard.ships = [];
     renderPlayerGameboard(player);
     player.gameboard.placeRandomShip(5);
     player.gameboard.placeRandomShip(4);
     player.gameboard.placeRandomShip(3);
     player.gameboard.placeRandomShip(2);
     player.gameboard.placeRandomShip(2);
-    console.log(player.gameboard)
     renderPlayerGameboard(player);
     startGame();
   });

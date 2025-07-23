@@ -66,11 +66,13 @@ function setUpGame(player, direction) {
     addHover(2, direction);
   }
   if (player.gameboard.ships.length === 5) {
+    console.log("this");
     startGame()
   }
 }
 
 function startGame() {
+    computer.gameboard.ships = [];
     computer.gameboard.placeRandomShip(5);
     computer.gameboard.placeRandomShip(4);
     computer.gameboard.placeRandomShip(3);
